@@ -18,7 +18,7 @@
 }
 
 .navigation-checkbox:checked ~ .navigation-background {
-	transform: scale(80);
+	transform: scale(130);
 }
 
 .navigation-checkbox:checked ~ .form-container {
@@ -73,6 +73,10 @@ label {
 	padding-bottom: 0.3rem;
 }
 
+.polygon-label {
+	padding-top: 0.5rem;
+}
+
 input,
 select {
 	width: 15rem;
@@ -84,6 +88,7 @@ select {
 .circle,
 .rectangle,
 .square,
+.polygon,
 button {
 	margin: 0.5rem 1rem;
 }

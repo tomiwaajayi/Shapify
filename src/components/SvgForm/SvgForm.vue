@@ -10,6 +10,7 @@
         <div class="navigation-background">&nbsp;</div>
         <div class="form-container">
           <form @submit.prevent>
+            <label class="shape">Please Fill all feilds correctly</label>
             <!-- Shape Selector -->
 
             <div class="shape">
@@ -20,6 +21,7 @@
                 <option>Square</option>
                 <option>Circle</option>
                 <option>Rectangle</option>
+                <option>Polygon</option>
               </select>
             </div>
 
@@ -36,11 +38,7 @@
             </div>
 
             <!-- Shape form -->
-
             <div class="shape-form">
-              <!-- No Shape -->
-              <!-- <h2 v-if="!selectedShape" class="no-shape">Shape Form</h2> -->
-
               <!-- Circle Form -->
               <div
                 class="circle-form circle"
@@ -107,6 +105,51 @@
                 />
               </div>
 
+              <!-- Polugon Form -->
+              <div
+                class="polygon-form polygon"
+                v-show="selectedShape === 'Polygon'"
+              >
+                <h2></h2>
+                <label for="Polygon-Length" class="label">Polygon Height</label>
+                <br />
+                <input
+                  v-model="polygonHeight"
+                  type="number"
+                  name="Polygon Height"
+                  id="Square-Height"
+                  min="1"
+                />
+
+                <br />
+
+                <label for="Polygon-Width" class="label polygon-label"
+                  >Polygon Width</label
+                >
+                <br />
+                <input
+                  v-model="polygonWidth"
+                  type="number"
+                  name="Polygon Width"
+                  id="Polygon-Width"
+                  min="1"
+                />
+
+                <br />
+
+                <label for="Polygon-Points" class="label polygon-label"
+                  >Polygon Points</label
+                >
+                <br />
+                <input
+                  v-model="polygonPoints"
+                  type="text"
+                  name="Polygon-Points"
+                  id="Polygon-Points"
+                  placeholder="e.g. 200,10 250,190 160,210"
+                />
+              </div>
+
               <!-- Submit and Clear Buttons -->
               <div class="button-container">
                 <button @click="drawShape" class="btn">Shapify!</button>
@@ -131,7 +174,9 @@ export default {
     rectLength: "",
     rectBreadth: "",
     drawnShape: "",
-    // submitButtonDisabled: this.drawnshape,
+    polygonHeight: "",
+    polygonWidth: "",
+    polygonPoints: "",
     colors: CSS_COLOR_NAMES,
   }),
 
@@ -146,6 +191,10 @@ export default {
 
     rectPerimeter: function () {
       return this.rectLength * 2.1 + this.rectBreadth * 2.1;
+    },
+
+    polygonPerimeter: function () {
+      return this.polygonHeight * 2.1 + this.polygonWidth * 2.1;
     },
   },
 
@@ -175,6 +224,9 @@ export default {
         this.rectLength = "";
         this.rectBreadth = "";
         this.drawnshape = "";
+        this.polygonHeight = "";
+        this.polygonWidth = "";
+        this.polygonPoints = "";
         document.getElementById("navi-toggle").checked = false;
       }
 
@@ -202,6 +254,9 @@ export default {
         this.rectLength = "";
         this.rectBreadth = "";
         this.drawnshape = "";
+        this.polygonHeight = "";
+        this.polygonWidth = "";
+        this.polygonPoints = "";
         document.getElementById("navi-toggle").checked = false;
       }
 
@@ -228,6 +283,28 @@ export default {
         this.rectLength = "";
         this.rectBreadth = "";
         this.drawnshape = "";
+        this.polygonHeight = "";
+        this.polygonWidth = "";
+        this.polygonPoints = "";
+        document.getElementById("navi-toggle").checked = false;
+      }
+
+      // Polygon
+      else if (this.selectedShape === "Polygon") {
+        let shapeHtml = `<svg height="${this.polygonHeight}" width="${this.polygonWidth}"><polygon points="${this.polygonPoints}" style="fill:transparent;stroke:${this.selectedColor};stroke-width:3" stroke-dasharray="${this.polygonPerimeter}" stroke-dashoffset="${this.polygonPerimeter}" class="animate-svg"/></svg>`;
+        this.drawnShape = shapeHtml;
+        this.$emit("add-shape", this.drawnShape);
+
+        this.selectedShape = "";
+        this.selectedColor = "";
+        this.circleRadius = "";
+        this.squareLength = "";
+        this.rectLength = "";
+        this.rectBreadth = "";
+        this.drawnshape = "";
+        this.polygonHeight = "";
+        this.polygonWidth = "";
+        this.polygonPoints = "";
         document.getElementById("navi-toggle").checked = false;
       }
     },
