@@ -1,0 +1,71 @@
+<div class="form-container">
+  <form @submit.prevent>
+    <div class="color-shape">
+      <!-- Shape Selector -->
+
+      <div class="shape">
+        <label for="selectShape" class="label">Select Shape</label> <br />
+        <select v-model="selectedShape" id="selectShape">
+          <option disabled value="">Select a shape</option>
+          <option>Square</option>
+          <option>Circle</option>
+          <option>Rectangle</option>
+        </select>
+      </div>
+
+      <!-- Color Selector -->
+      <div class="color">
+        <label for="selectColor" class="label">Select Color</label> <br />
+        <select v-model="selectedColor" id="selectColor">
+          <option disabled value="">Select a Color</option>
+          <option v-for="color in colors" :key="color">
+            {{ color }}
+          </option>
+        </select>
+      </div>
+      <!-- Submit and Clear Buttons -->
+      <div class="button-container">
+        <button @click="drawShape" class="btn">Shapify!</button>
+        <button @click="clearShapes" class="btn">Clear Shapes</button>
+      </div>
+    </div>
+
+    <div class="shape-form"></div>
+
+    <!-- Shape form -->
+
+    <div class="shape-form">
+      <!-- No Shape -->
+      <!-- <h2 v-if="!selectedShape" class="no-shape">Shape Form</h2> -->
+
+      <!-- Circle Form -->
+      <div class="circle-form circle" v-if="selectedShape === 'Circle'">
+        <label for="circle-radius" class="label">Circle Radius</label>
+        <br />
+        <input v-model="circleRadius" type="number" name="circle-radius" id="cirle-radius" min="1" />
+      </div>
+
+      <!-- Rectangle Form -->
+      <div class="rectangle-form" v-if="selectedShape === 'Rectangle'">
+        <div class="rectangle">
+          <label for="rectangle-length" class="label">Rectangle Length</label>
+          <br />
+          <input v-model="rectLength" type="number" name="rectangle-length" id="rectangle-length" min="1" />
+        </div>
+
+        <div class="rectangle">
+          <label for="rectangle-breadth" class="label">Rectangle breadth</label>
+          <br />
+          <input v-model="rectBreadth" type="number" name="rectangle-breadth" id="rectangle-breadth" min="1" />
+        </div>
+      </div>
+
+      <!-- Square Form -->
+      <div class="square-form square" v-if="selectedShape === 'Square'">
+        <label for="Square Length" class="label">Square Length</label>
+        <br />
+        <input v-model="squareLength" type="number" name="Square length" id="Square Length" min="1" />
+      </div>
+    </div>
+  </form>
+</div>
