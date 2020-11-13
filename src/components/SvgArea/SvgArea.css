@@ -3,7 +3,6 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-around;
-	/* align-content: center; */
 	height: 85vh;
 	overflow: scroll;
 }
@@ -13,8 +12,6 @@ svg {
 }
 
 .animate-svg {
-	/* stroke-dasharray: 1000;
-  stroke-dashoffset: 1000; */
 	animation: dash 5s linear;
 	animation-delay: 0s;
 	animation-iteration-count: 1;

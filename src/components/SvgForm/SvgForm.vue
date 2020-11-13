@@ -3,8 +3,13 @@
     <div class="form-header">
       <div class="title">Shapify</div>
       <div>
-        <input class="navigation-checkbox" type="checkbox" id="navi-toggle" />
-        <label for="navi-toggle" class="navigation-button">
+        <input
+          class="navigation-checkbox"
+          type="checkbox"
+          id="navi-toggle"
+          :checked="isChecked"
+        />
+        <label for="navi-toggl" class="navigation-button" @click="toggleCheck">
           <span class="navigation-icon">&nbsp;</span>
         </label>
         <div class="navigation-background">&nbsp;</div>
@@ -177,6 +182,7 @@ export default {
     polygonHeight: "",
     polygonWidth: "",
     polygonPoints: "",
+    isChecked: false,
     colors: CSS_COLOR_NAMES,
   }),
 
@@ -199,6 +205,10 @@ export default {
   },
 
   methods: {
+    // Toggle nav menu
+    toggleCheck: function () {
+      this.isChecked = !this.isChecked;
+    },
     drawShape: function () {
       // rectangle
       if (this.selectedShape === "Rectangle") {
@@ -227,7 +237,7 @@ export default {
         this.polygonHeight = "";
         this.polygonWidth = "";
         this.polygonPoints = "";
-        document.getElementById("navi-toggle").checked = false;
+        this.isChecked = false;
       }
 
       // Square
@@ -257,7 +267,7 @@ export default {
         this.polygonHeight = "";
         this.polygonWidth = "";
         this.polygonPoints = "";
-        document.getElementById("navi-toggle").checked = false;
+        this.isChecked = false;
       }
 
       // Circle
@@ -286,7 +296,7 @@ export default {
         this.polygonHeight = "";
         this.polygonWidth = "";
         this.polygonPoints = "";
-        document.getElementById("navi-toggle").checked = false;
+        this.isChecked = false;
       }
 
       // Polygon
@@ -305,13 +315,13 @@ export default {
         this.polygonHeight = "";
         this.polygonWidth = "";
         this.polygonPoints = "";
-        document.getElementById("navi-toggle").checked = false;
+        this.isChecked = false;
       }
     },
 
     clearShapes() {
       this.$emit("clear-shapes");
-      document.getElementById("navi-toggle").checked = false;
+      this.isChecked = false;
     },
   },
 };
